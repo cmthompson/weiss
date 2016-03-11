@@ -10,14 +10,14 @@ sys.path.append('/home/chris/PyScripts')
 
 
 
-import ramanTools.RamanTools
+import ramanTools.RamanTools, ramanTools.RamanSpectrum
 from Tkinter import *
 import os
-
+ioff()
 os.chdir('/home/chris/Documents/DataWeiss')
 
 root = Tk()
 root.withdraw()
-ramanTools.RamanTools.DisplayWindow(root)
+ramanTools.RamanTools.DisplayWindow(root,ax=None)
 root.mainloop()
 

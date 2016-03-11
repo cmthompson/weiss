@@ -6,6 +6,7 @@ Created on Fri Jan  1 15:30:38 2016
 """
 
 from numpy import random
+years =  arange(30)
 class Account(object):
     
     def __init__(self,initialvalue,growthrate,
@@ -13,29 +14,29 @@ class Account(object):
         self.initialvalue = initialvalue
         self.salary=salary
         self.growthrate = pandas.Series(
-                            (ones((100,))+random.randn(100)*growthnoise)*growthrate,
-                             arange(0,100))
+                            (ones(years.shape)+random.randn(years.size)*growthnoise)*growthrate,
+                             years)
         print 'average growth rate', mean(self.growthrate)
     
         
         
-        self.wd = pandas.DataFrame(zeros((100,)), arange(100))
+        self.wd = pandas.DataFrame(zeros(years.shape), years)
         for i in periodicwithdrawls:
             print i
             self.wd = pandas.concat([self.wd,pandas.DataFrame(array(i[1]),array(i[0]))])
             
      
         
-        self.account = pandas.Series(ones((100,))*self.initialvalue, arange(0,100))
+        self.account = pandas.Series(ones(years.shape)*self.initialvalue, years)
         self.calculate()
         self.plot()
-        print 'final amount at 100 y.o.', self.account.iget(70)
+        print 'final amount at 60 y.o.', self.account[29]
         return None
     
     def recalc_growthrate(self):
         self.growthrate = pandas.Series(
-                            (ones((100,))+random.randn(100)*growthnoise)*growthrate,
-                             arange(0,100))
+                            (ones(years.shape)+random.randn(years.size)*growthnoise)*growthrate,
+                             years)
         return 0
     
     
@@ -45,12 +46,12 @@ class Account(object):
             self.account[i]=self.account[i-1]*(1+self.growthrate[i])
             self.account[i]+=self.salary
             
-            for wd in self.wd:
-                print type(wd)
-                if True:#wd[i]:
-                    
-                    self.account[i]-=wd[i]
-            
+#            for wd in self.wd:
+#                print type(wd)
+#                if True:#wd[i]:
+#                    
+#                    self.account[i]-=wd[i]
+#            
         return None
         
     def plot(self,*args,**kwargs):
